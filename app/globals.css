@@ -1,0 +1,304 @@
+@import "tailwindcss";
+
+@variant dark (.dark &);
+
+@theme {
+  --font-serif: var(--font-serif), Georgia, serif;
+  --font-sans: var(--font-sans), Inter, system-ui, sans-serif;
+  
+  --color-beige-50: #FAF6EE; /* Premium Warm Linen Ivory */
+  --color-beige-100: #F3EDE0; /* Soft Champagne Sandstone Cream */
+  --color-beige-200: #EBE3D5; /* Natural Organic Cotton Flax */
+  --color-beige-300: #C4B29E; /* Sandstone */
+  
+  --color-clay-300: #C4B29E; /* Sandstone */
+  --color-clay-400: #A68E7B; /* Muted Clay */
+  --color-clay-500: #997D6A; /* Deep Muted Clay */
+  --color-clay-600: #614E42; /* Soft Clay Shadow */
+  --color-clay-700: #1A1412; /* Deep Espresso */
+  
+  --color-gold-200: #F6EAD2; /* Soft Champagne Cream */
+  --color-gold-300: #EAD09D; /* Champagne Gold */
+  --color-gold-400: #CCA553; /* Warm Amber Gold */
+  --color-gold-500: #B38F44; /* Luxury Gold Core */
+  --color-gold-600: #8C6F34; /* Deep Muted Gold */
+  --color-gold-700: #806013; /* Rich Deep Solar Gold */
+  
+  --color-charcoal-50: #F9F9F8;
+  --color-charcoal-100: #F1F1EF;
+  --color-charcoal-200: #E3E3E0;
+  --color-charcoal-300: #B5B5B0;
+  --color-charcoal-400: #888880;
+  --color-charcoal-450: #75756C; /* Medium Muted Charcoal */
+  --color-charcoal-500: #60605A;
+  --color-charcoal-550: #4D4D46; /* Deep Muted Charcoal */
+  --color-charcoal-600: #3E3E38; /* Rich Body Charcoal */
+  --color-charcoal-650: #383834;
+  --color-charcoal-700: #2C2C28;
+  --color-charcoal-800: #1F1F1D;
+  --color-charcoal-900: #101010; /* Charcoal Black */
+  --color-charcoal-950: #120E0D; /* Deep Espresso Black */
+
+  /* Dedicated design system tokens */
+  --color-warm-ivory: #FDFBF7;
+  --color-champagne-gold: #EAD09D;
+  --color-muted-clay: #997D6A;
+  --color-sandstone: #C4B29E;
+  --color-moon-silver: #E0E5E5;
+  --color-charcoal-black: #101010;
+  --color-deep-espresso: #1A1412;
+}
+
+/* Custom Base Styles */
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  background-color: var(--color-beige-50);
+  color: var(--color-charcoal-900);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 1.5s cubic-bezier(0.16, 1, 0.3, 1), color 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark body {
+  background-color: var(--color-charcoal-950);
+  color: var(--color-beige-50);
+}
+
+/* Global Transitions for elements */
+*, *::before, *::after {
+  transition: background-color 1.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Cinematic film grain overlay */
+.grain-overlay {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200%;
+  background: transparent url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.02"/%3E%3C/svg%3E') repeat;
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 9999;
+  animation: noise-animation 0.8s steps(4) infinite;
+}
+
+.dark .grain-overlay {
+  opacity: 0.55;
+  background: transparent url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.03"/%3E%3C/svg%3E') repeat;
+}
+
+@keyframes noise-animation {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-0.5%, -0.5%); }
+  20% { transform: translate(-1%, 0.5%); }
+  30% { transform: translate(0.5%, -1%); }
+  40% { transform: translate(-0.5%, 1.5%); }
+  50% { transform: translate(-1%, 0.5%); }
+  60% { transform: translate(0.5%, 1%); }
+  70% { transform: translate(1%, -1%); }
+  80% { transform: translate(-0.5%, -0.5%); }
+  90% { transform: translate(1%, -1.5%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Custom Typography & Premium Outlines */
+.font-serif-editorial {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+.text-glow-gold {
+  text-shadow: 0 0 20px rgba(223, 190, 125, 0.25);
+}
+
+.text-glow-white {
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+}
+
+/* Sun breathing keyframes */
+@keyframes solar-breath {
+  0%, 100% {
+    transform: scale(1) translate(0px, 0px);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.08) translate(5px, -10px);
+    opacity: 1;
+  }
+}
+
+@keyframes solar-corona {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.75;
+  }
+  50% {
+    transform: rotate(180deg) scale(1.15);
+    opacity: 0.9;
+  }
+}
+
+.animate-solar-breath {
+  animation: solar-breath 25s ease-in-out infinite;
+}
+
+.animate-solar-corona {
+  animation: solar-corona 45s ease-in-out infinite;
+}
+
+@keyframes solar-rays {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-solar-rays {
+  animation: solar-rays 120s linear infinite;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-beige-50);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: var(--color-charcoal-950);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-clay-400);
+  border-radius: 3px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-charcoal-700);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-clay-500);
+}
+
+/* Premium Card & Outlines */
+.glass-premium-light {
+  background: rgba(252, 250, 247, 0.55);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(236, 228, 219, 0.45);
+  box-shadow: 0 8px 32px 0 rgba(142, 120, 104, 0.02);
+}
+
+.glass-premium-dark {
+  background: rgba(18, 18, 18, 0.65);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Subtle Shimmer for interactive components */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-hover:hover {
+  background: linear-gradient(90deg, transparent, rgba(234, 210, 163, 0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+/* Custom premium buttons */
+.btn-luxury {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-luxury::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: skewX(-20deg);
+  transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+}
+
+.btn-luxury:hover::after {
+  opacity: 1;
+  left: 125%;
+}
+
+/* Sound indicator microrithms */
+.sound-bar {
+  width: 2px;
+  background-color: var(--color-gold-500);
+  transition: height 0.3s ease;
+}
+
+/* Force hide Netlify feedback or other injected floating badges in the viewport */
+[class*="netlify"], [id*="netlify"], netlify-feedback-button, #netlify-feedback-button, .netlify-feedback-button {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+
+/* Twinkling & Floating celestial golden stars */
+@keyframes star-twinkle {
+  0%, 100% {
+    opacity: var(--star-opacity-min, 0.12);
+    transform: translateY(0px) scale(1.0);
+  }
+  35% {
+    opacity: var(--star-opacity-max, 0.32);
+    transform: translateY(-3px) scale(1.05);
+  }
+  70% {
+    opacity: calc(var(--star-opacity-min, 0.12) * 1.6);
+    transform: translateY(-5px) scale(1.02);
+  }
+}
+
+.animate-star-twinkle {
+  animation: star-twinkle var(--star-duration, 8s) ease-in-out infinite;
+}
+
+@keyframes sunbeam-float {
+  0% {
+    transform: translateY(0px) translateX(0px) scale(0.8);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(-50px) translateX(20px) scale(1.15);
+    opacity: 0.45;
+  }
+  100% {
+    transform: translateY(-100px) translateX(-5px) scale(0.8);
+    opacity: 0.15;
+  }
+}
+
+.animate-sunbeam-float {
+  animation: sunbeam-float var(--mote-duration, 12s) ease-in-out infinite;
+}
