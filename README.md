@@ -1,2 +1,2 @@
 # eleved-frontend
-Luxury Ayurveda Cafe Frontend
+Ayurveda Cafe Frontend
